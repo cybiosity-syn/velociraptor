@@ -1,17 +1,11 @@
-# Only trigger when a PR is committed.
 name: Linux Build Musl Static
 on:
   push:
     branches:
       - 'v0.74-release'
-#on: [pull_request]
-#on:
-#  pull_request:
-#    types: [closed]
 
 jobs:
   build:
-    if: github.event.pull_request.merged
     name: Build
     runs-on: ubuntu-latest
     steps:
