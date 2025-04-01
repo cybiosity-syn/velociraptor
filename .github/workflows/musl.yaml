@@ -23,15 +23,15 @@ jobs:
       run: |
         go get -v -t -d ./...
         sudo apt-get update
-        sudo apt-get install -y zip build-essential pkg-config libssl-dev gcc-multilib g++-multilib
+        sudo apt-get install -y zip unzip build-essential pkg-config libssl-dev gcc-multilib g++-multilib
 
     - name: Install Musl
       run: |
-        wget https://musl.libc.org/releases/musl-1.2.5.tar.gz
-        tar -xvzf musl-1.2.5.tar.gz
-        cd musl-1.2.5
-        CC="gcc -m32" ./configure --target=i686-linux-gnu
-        sudo make install
+        wget https://github.com/richfelker/musl-cross-make/archive/refs/heads/master.zip
+        unset CC
+        unzip master.zip
+        cd musl-cross-make-master
+        sudo make TARGET=i386-linux-musl OUTPUT=/usr/local/musl install
         cd ..
 
     - name: Use Node.js

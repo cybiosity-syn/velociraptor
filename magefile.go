@@ -263,7 +263,7 @@ func LinuxMusl386() error {
 	return Builder{
 		extra_tags:    " release yara disable_gui ",
 		goos:          "linux",
-		cc:            "musl-gcc",
+		cc:            "i386-linux-musl-gcc",
 		extra_name:    "-musl",
 		disable_cgo:   false,
 		extra_ldflags: "-linkmode external -extldflags \"-static\"",
