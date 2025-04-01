@@ -1,9 +1,13 @@
 # Only trigger when a PR is committed.
 name: Linux Build Musl Static
-#on: [pull_request]
 on:
-  pull_request:
-    types: [closed]
+  push:
+    branches:
+      - 'v0.74-release'
+#on: [pull_request]
+#on:
+#  pull_request:
+#    types: [closed]
 
 jobs:
   build:
