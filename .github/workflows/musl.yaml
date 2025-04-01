@@ -30,7 +30,7 @@ jobs:
         wget https://musl.libc.org/releases/musl-1.2.5.tar.gz
         tar -xvzf musl-1.2.5.tar.gz
         cd musl-1.2.5
-        CC="gcc -m32" ./configure
+        CC="gcc -m32" ./configure --target=i686-linux-gnu
         sudo make install
         cd ..
 
