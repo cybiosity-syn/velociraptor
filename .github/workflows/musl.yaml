@@ -23,14 +23,14 @@ jobs:
       run: |
         go get -v -t -d ./...
         sudo apt-get update
-        sudo apt-get install -y zip build-essential pkg-config libssl-dev gcc-aarch64-linux-gnu
+        sudo apt-get install -y zip build-essential pkg-config libssl-dev gcc-multilib g++-multilib
 
     - name: Install Musl
       run: |
         wget https://musl.libc.org/releases/musl-1.2.5.tar.gz
         tar -xvzf musl-1.2.5.tar.gz
         cd musl-1.2.5
-        ./configure
+        CC="gcc -m32" ./configure
         sudo make install
         cd ..
 
@@ -51,11 +51,7 @@ jobs:
         mkdir ./output/
         export PATH=$PATH:~/go/bin/:/usr/local/musl/bin
         go run make.go -v UpdateDependentTools
-        go run make.go -v LinuxMusl
         go run make.go -v LinuxMusl386
-        # go run make.go -v LinuxMuslDebug
-        go run make.go -v Linux
-        go run make.go -v LinuxArm64
 
     - name: StoreBinaries
       uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1
